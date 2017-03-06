@@ -1,0 +1,25 @@
+{
+  "name": "dotenv-cli-example",
+  "description": "Simple example with browserify and watchify",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "BSD-2-Clause",
+  "private": true,
+  "scripts": {
+    "watch": "dotenv NODE_ENV=development concurrently --kill-others --prefix \"[{name}]\" --names \"watch:scripts\" \"npm run watch:scripts\"",
+    "watch:scripts": "watchify index.js -v -o dist.js",
+    "build": "dotenv NODE_ENV=production browserify index.js -v -o dist.js"
+  },
+  "devDependencies": {
+    "browserify": "latest",
+    "concurrently": "latest",
+    "dotenv": "latest",
+    "envify": "latest",
+    "watchify": "latest"
+  },
+  "browserify": {
+    "transform": [
+      ["envify", { "_": "purge" }]
+    ]
+  }
+}
